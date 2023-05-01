@@ -183,7 +183,10 @@ def run(
                         y2=(xyxy[3].item())
                         
                         
-                        dfpixel = dfpixel.append({'Frame' :int(frame) , 'Type' :names[int(cls)], 'X1' : x1,'Y1': y1,'X2':x2 , 'Y2':y2 },ignore_index = True)
+                        #dfpixel = dfpixel.append({'Frame' :int(frame) , 'Type' :names[int(cls)], 'X1' : x1,'Y1': y1,'X2':x2 , 'Y2':y2 },ignore_index = True)
+                        dfpixel = pd.concat([dfpixel, pd.DataFrame([{'Frame' :int(frame) , 'Type' :names[int(cls)], 'X1' : x1,'Y1': y1,'X2':x2 , 'Y2':y2 }])], ignore_index=True)
+                        #df = pd.DataFrame(df).append(new_row, ignore_index=True)
+                        #df = pd.concat([df, pd.DataFrame([new_row])], ignore_index=True)
 
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
